@@ -16,12 +16,6 @@ class Piece:
         # default piece is a non king
         self.king = False
 
-        # make it so pieces can only move in a direction that will not take them off the board (up or down )
-        if self.color == FUNCOLOR:
-            self.direction = -1
-        else:
-            self.direction = 1
-
         self.x = 0
         self.y = 0
         self.calc_postion()

@@ -63,3 +63,91 @@ class Board:
                 piece = self.board[row][col]
                 if piece != 0:
                     piece.draw_piece(win)
+
+    def get_jumpable_spaces(self, piece):
+        moves = {}
+        left = piece.col - 1
+        right = piece.col + 1
+        row = piece.row
+        if piece.color == RED or piece.king:
+            # moves.update(self._traverse_left(
+            # row - 1, Looks upward since it is RED
+            # max(row-3,-1), HOW many rows up am I looking up in this case 2 rows higher
+            # -1, piece.color, color
+            # left)) WHere we are starting
+            moves.update(self._traverse_left(row - 1, max(row-3,-1), -1, piece.color, left))
+            moves.update(self._traverse_right(row - 1, max(row-3,-1), -1, piece.color, right))
+            
+        if piece.color == WHITE or piece.king:
+            moves.update(self._traverse_left(row + 1, min(row+3,ROWS), 1, piece.color, left))
+            moves.update(self._traverse_right(row + 1, max(row+3,ROWS), 1, piece.color, right))
+
+        return moves
+
+    # step says if we are going up or down
+    def _traverse_left(self, start, stop, stepsize, color, left, skipped=[]):
+        moves = {}
+        last = []
+        for rows in range(start, stop, stepsize):
+            if left < 0:
+                break
+
+            current = self.board[rows][left]
+            if current == 0: #if we fouhd an empty square
+                if skipped and not last: # we found a blank square but we cant move there
+                    break
+                elif skipped:
+                    moves[(rows,left)] = last + skipped # where we are double jumping
+                else:
+                    moves[(rows,left)] = last # add as possible move 
+
+                if last: # and last had a value in it, we found something when looping
+                    if stepsize == -1:
+                        row= max(rows-3,0)
+                    else:
+                        row= min(rows+3,ROWS)
+
+                    moves.update(self._traverse_left(rows+stepsize,rows, stepsize,color,left-1,skipped=last))
+                    moves.update(self._traverse_right(rows+stepsize,rows, stepsize,color,left+1,skipped=last))
+                    break
+            elif current.color == color: # otherwise if there is a piece with a color and its our same color, then we cannot move there
+                break
+            else: # otherwise, we could jump over it if it is a empty square next
+                last = current
+
+            left -= 1
+        return moves
+
+    def _traverse_right(self, start, stop, stepsize, color, right, skipped=[]):
+        moves = {}
+        last = []
+        for rows in range(start, stop, stepsize):
+            if right >= COLS:
+                break
+
+            current = self.board[r][right]
+            if current == 0: #if we fouhd an empty square
+                if skipped and not last: # we found a blank square but we cant move there
+                    break
+                elif skipped:
+                    moves[(rows,right)] = last + skipped # where we are double jumping
+                else:
+                    moves[(rows,right)] = last # add as possible move 
+
+                if last: # and last had a value in it, we found something when looping
+                    if stepsize == -1:
+                        row= max(rows-3,0)
+                    else:
+                        row= min(rows+3,ROWS)
+
+                    moves.update(self._traverse_left(rows+stepsize,rows, stepsize,color,right-1,skipped=last))
+                    moves.update(self._traverse_right(rows+stepsize,rows, stepsize,color,right+1,skipped=last))
+                    break
+            elif current.color == color: # otherwise if there is a piece with a color and its our same color, then we cannot move there
+                break
+            else: # otherwise, we could jump over it if it is a empty square next
+                last = current
+
+            right += 1
+
+        return moves
