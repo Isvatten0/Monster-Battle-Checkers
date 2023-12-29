@@ -57,6 +57,9 @@ class Piece:
             y3 = self.y + int((radius + hair_length) * math.sin(math.radians(i * (360 / num_triangles) + 180 / num_triangles)))
             pygame.draw.polygon(win, hair_color, [(x1, y1), (x2, y2), (x3, y3)])
 
+        if self.king:
+            win.blit(CAPE, (self.x - CAPE.get_width()//2, self.y + CAPE.get_height()//7))
+
         # Draw main Piece
         pygame.draw.circle(win, GRAY, (self.x, self.y), radius + self.BORDER)
         pygame.draw.circle(win, self.color, (self.x, self.y), radius)
@@ -80,6 +83,14 @@ class Piece:
         tooth_height = 5
         tooth_position = (self.x + 4 - tooth_width // 2, self.y + 7 - tooth_height // 2)
         pygame.draw.rect(win, (255, 215, 0), (tooth_position[0], tooth_position[1], tooth_width, tooth_height))
+
+        if self.king:
+            win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - 2 * CROWN.get_height()//1))
+            
+    def move_update_position(self, row, col):
+        self.row = row
+        self.col = col
+        self.calc_postion()
 
     # what is the internal representation of this object. Used for debugginging.    
     def __repr__(self):

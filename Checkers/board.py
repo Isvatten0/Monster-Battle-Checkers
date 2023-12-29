@@ -5,7 +5,6 @@ from .piece import *
 class Board:
     def __init__(self):
         self.board = []
-        self.selected_piece = None
         self.red_left = 12
         self.white_left = 12
         self.red_kings = 0
@@ -24,6 +23,20 @@ class Board:
                 else:
                     pygame.draw.rect(win, BLACK, (row * SQUARE_SIZE, col * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
+    def get_piece(self, row, col):
+        return self.board[row][col]
+
+    def move(self, piece, row, col):
+        # delete piece
+        # change piece positon
+        self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
+        piece.move_update_position(row, col)
+        if row == ROWS or row == 0:
+            piece.make_king()
+            if piece.color == RED:
+                self.red_kings = self.red_kings + 1
+            else:
+                self.white_kings = self.white_kings + 1
     
     def create_board(self):
         for row in range(ROWS):

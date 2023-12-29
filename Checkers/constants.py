@@ -34,3 +34,10 @@ FUNCOLOR3 = (r3, g3, b3)
 FUNCOLOR4 = (r4, g4, b4)
 
 LIGHTBLUE = (173, 216, 230)
+
+CROWN = pygame.image.load('assets/crown.png')
+CROWN = pygame.transform.scale(CROWN, (44,25))
+CAPE = pygame.image.load('assets/cape.png')
+CAPE = pygame.transform.scale(CAPE, (100,60))
+CAPEOVER = pygame.image.load('assets/ahh.png')
+CAPEOVER = pygame.transform.scale(CAPEOVER, (75,100))
