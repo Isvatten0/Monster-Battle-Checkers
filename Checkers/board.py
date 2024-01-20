@@ -31,7 +31,7 @@ class Board:
         # change piece positon
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         piece.move_update_position(row, col)
-        if (row == ROWS - 1 or row == 0) and self.king == False:
+        if (row == ROWS - 1 or row == 0) and piece.king == False:
             piece.make_king()
             if piece.color == FUNCOLOR:
                 self.red_kings = self.red_kings + 1
@@ -102,7 +102,7 @@ class Board:
                 
                 if last: # and last had a value in it, we found something when looping
                     if stepsize == -1:
-                        row = max(r-3, 0)
+                        row = max(r-3, -1)
                     else:
                         row = min(r+3, ROWS)
                     moves.update(self._traverse_left(r+stepsize, row, stepsize, color, left-1,skipped=last))
@@ -137,7 +137,7 @@ class Board:
                 
                 if last:
                     if stepsize == -1:
-                        row = max(r-3, 0)
+                        row = max(r-3, -1)
                     else:
                         row = min(r+3, ROWS)
                     moves.update(self._traverse_left(r+stepsize, row, stepsize, color, right-1,skipped=last))
