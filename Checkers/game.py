@@ -7,7 +7,7 @@ class Game:
     def __init__(self, win):
         self.selected = None
         self.board = Board()
-        self.turn = RED
+        self.turn = FUNCOLOR
         self.valid_moves = {}
         self.win = win
 
@@ -20,7 +20,7 @@ class Game:
     def reset(self):
         self.selected = None
         self.board = Board()
-        self.turn = RED
+        self.turn = FUNCOLOR
         self.valid_moves = {}
 
     def select(self, row, col):
@@ -30,31 +30,39 @@ class Game:
             if not result:
                 self.selected = None
                 self.select(row,col)
-        else:
-            piece = self.board.get_piece(row, col)
-            if piece != 0 and piece.color == self.turn:
-                self.selected = piece
-                self. valid_moves = self.board.get_valid_moves(piece)
-                return True
+        
+        piece = self.board.get_piece(row, col)
+        if piece != 0 and piece.color == self.turn:
+            self.selected = piece
+            self. valid_moves = self.board.get_jumpable_spaces(piece)
+            return True
+        
         return False
 
     def _move_game_piece(self, row, col):
         piece = self.board.get_piece(row,col)
         if self.selected and piece == 0 and (row,col) in self.valid_moves:
             self.board.move(self.selected, row, col)
+            skipped = self.valid_moves[(row,col)]
             self.change_turn()
+            if skipped:
+                self.board.remove(skipped)
         else:
             return False
         return True
     
+    def remove(self,pieces):
+        for piece in pieces:
+            self.board[piece.row][piece.col] = 0
     # Inverses the color which is currently able to move
     def change_turn(self):
-        if self.turn == RED:
-            self.turn == WHITE
+        self.valid_moves = {}
+        if self.turn == FUNCOLOR:
+            self.turn = FUNCOLOR2
         else:
-            self.turn == RED
+            self.turn = FUNCOLOR
 
     def draw_jumpable_spaces(self, moves):
         for move in moves:
             row, col = move
-            pygame.draw.rect(self.win,LIGHTBLUE,(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+            pygame.draw.rect(self.win, LIGHTBLUE, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))

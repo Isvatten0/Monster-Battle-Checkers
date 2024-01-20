@@ -33,7 +33,7 @@ FUNCOLOR2 = (r2, g2, b2)
 FUNCOLOR3 = (r3, g3, b3)
 FUNCOLOR4 = (r4, g4, b4)
 
-LIGHTBLUE = (173, 216, 230)
+LIGHTBLUE = (173, 216, 230,0.5)
 
 CROWN = pygame.image.load('assets/crown.png')
 CROWN = pygame.transform.scale(CROWN, (44,25))
