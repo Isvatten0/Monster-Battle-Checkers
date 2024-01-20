@@ -1,8 +1,8 @@
 import pygame
 import random
 
-WIDTH = 800
-HEIGHT = 800
+WIDTH = 700
+HEIGHT = 700
 ROWS = 8
 COLS = 8
 SQUARE_SIZE = WIDTH//COLS

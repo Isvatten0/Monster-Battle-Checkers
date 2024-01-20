@@ -33,26 +33,26 @@ class Piece:
         
         radius = SQUARE_SIZE // 2 - self.PADDING
 
-        # Draw triangle hair around the top of the circle
-        hair_length = 20
-        num_triangles = 5
-        if self.color == FUNCOLOR:
-            hair_color = FUNCOLOR3  
-        else:
-            hair_color = FUNCOLOR4 
-
-        for i in range(num_triangles):
-            angle = math.radians(i * (360 / num_triangles))
-            x1 = self.x + int(radius * math.cos(angle))
-            y1 = self.y + int(radius * math.sin(angle))
-            x2 = self.x + int((radius + hair_length) * math.cos(angle))
-            y2 = self.y + int((radius + hair_length) * math.sin(angle))
-            x3 = self.x + int((radius + hair_length) * math.cos(math.radians(i * (360 / num_triangles) + 180 / num_triangles)))
-            y3 = self.y + int((radius + hair_length) * math.sin(math.radians(i * (360 / num_triangles) + 180 / num_triangles)))
-            pygame.draw.polygon(win, hair_color, [(x1, y1), (x2, y2), (x3, y3)])
-
         if self.king:
             win.blit(CAPE, (self.x - CAPE.get_width()//2, self.y + CAPE.get_height()//7))
+        else:
+            # Draw triangle hair around the top of the circle
+            hair_length = 20
+            num_triangles = 5
+            if self.color == FUNCOLOR:
+                hair_color = FUNCOLOR3  
+            else:
+                hair_color = FUNCOLOR4 
+
+            for i in range(num_triangles):
+                angle = math.radians(i * (360 / num_triangles))
+                x1 = self.x + int(radius * math.cos(angle))
+                y1 = self.y + int(radius * math.sin(angle))
+                x2 = self.x + int((radius + hair_length) * math.cos(angle))
+                y2 = self.y + int((radius + hair_length) * math.sin(angle))
+                x3 = self.x + int((radius + hair_length) * math.cos(math.radians(i * (360 / num_triangles) + 180 / num_triangles)))
+                y3 = self.y + int((radius + hair_length) * math.sin(math.radians(i * (360 / num_triangles) + 180 / num_triangles)))
+                pygame.draw.polygon(win, hair_color, [(x1, y1), (x2, y2), (x3, y3)])
 
         # Draw main Piece
         pygame.draw.circle(win, GRAY, (self.x, self.y), radius + self.BORDER)

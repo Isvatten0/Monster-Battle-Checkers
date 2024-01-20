@@ -51,9 +51,6 @@ class Game:
             return False
         return True
     
-    def remove(self,pieces):
-        for piece in pieces:
-            self.board[piece.row][piece.col] = 0
     # Inverses the color which is currently able to move
     def change_turn(self):
         self.valid_moves = {}
@@ -66,3 +63,6 @@ class Game:
         for move in moves:
             row, col = move
             pygame.draw.rect(self.win, LIGHTBLUE, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+
+    def winner(self):
+        return self.board.winner()
