@@ -31,7 +31,7 @@ class Board:
         # change piece positon
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         piece.move_update_position(row, col)
-        if row == ROWS - 1 or row == 0:
+        if (row == ROWS - 1 or row == 0) and self.king == False:
             piece.make_king()
             if piece.color == FUNCOLOR:
                 self.red_kings = self.red_kings + 1
