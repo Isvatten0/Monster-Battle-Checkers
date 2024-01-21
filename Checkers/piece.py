@@ -89,3 +89,4 @@ class Piece:
     # what is the internal representation of this object. Used for debugginging.    
     def __repr__(self):
         return str(self.color)
+    

@@ -2,6 +2,7 @@ import pygame
 from Checkers.constants import *
 from Checkers.game import Game
 from minimax.algorithm import minimax
+import time
 
 FPS = 60
 WIN = pygame.display.set_mode((WIDTH,HEIGHT), pygame.RESIZABLE)
@@ -30,8 +31,14 @@ def main():
         if game.winner() != None:
             if FUNCOLOR2 == game.winner():
                 name = "The AI Wins! :()"
+                WIN.blit(LOSESCREEN, (SQUARE_SIZE, SQUARE_SIZE * 2))
+                pygame.display.update()
+                time.sleep(2)
             else:
                 name = "You Won! :)"
+                WIN.blit(WINSCREEN, (SQUARE_SIZE, SQUARE_SIZE * 2))
+                pygame.display.update()
+                time.sleep(2)
             print(name)
             run = False
             
