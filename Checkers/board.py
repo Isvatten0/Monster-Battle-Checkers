@@ -168,7 +168,20 @@ class Board:
         return None
     
     def evaluate(self):
-        return self.white_left - self.red_left + (self.white_kings * 0.5 - self.red_kings * 0.5)
+        # Piece values
+        white_piece_value = 1
+        red_piece_value = -1
+        king_value = 2
+
+        # Evaluate based on piece count and position
+        score = (self.white_left - self.red_left) * white_piece_value
+        score += (self.white_kings - self.red_kings) * king_value
+
+        # Evaluate based on board control or piece positioning
+        # You can add more sophisticated criteria here based on the specific rules of your game
+        # For example, consider the central control, piece mobility, etc.
+
+        return score
     
     def get_all_pieces(self, color):
         pieces = []
