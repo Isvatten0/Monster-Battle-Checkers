@@ -27,16 +27,22 @@ def draw_difficulty_selection_window():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit()
 
-        screen.fill((255, 255, 255))
+        
 
-        text = font.render("Select Difficulty", True, (0, 0, 0))
-        screen.blit(text, (50, 50))
+        screen.fill((161, 83, 67))  # Crimson background color
+
+        pygame.draw.rect(screen, (255, 255, 255), (0 + WIDTH//20, WIDTH//20, HEIGHT - HEIGHT//10 ,HEIGHT - HEIGHT//10), 5)
+
+        text = font.render("Select Difficulty (Press on Keyboard)", True, (255, 255, 255))  # White text color
+        text_rect = text.get_rect(center=(WIDTH // 2, 80))
+        screen.blit(text, text_rect)
 
         for i, option in enumerate(difficulty_options):
-            text = font.render(f"{i + 1}. {option}", True, (0, 0, 0))
-            screen.blit(text, (50, 100 + i * 30))
+            text = font.render(f"{i + 1}. {option}", True, (255, 255, 255))
+            text_rect = text.get_rect(center=(WIDTH // 2, 120 + i * 30))
+            screen.blit(text, text_rect)
+            screen.blit(CHOICE, (WIDTH//2 - (SQUARE_SIZE * 3), HEIGHT//2 - (SQUARE_SIZE)))
 
         pygame.display.flip()
 
