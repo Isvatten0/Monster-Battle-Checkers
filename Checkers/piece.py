@@ -38,7 +38,7 @@ class Piece:
         else:
             # Draw triangle hair around the top of the circle
             hair_length = 20
-            num_triangles = 5
+            num_triangles = hair
             if self.color == FUNCOLOR:
                 hair_color = FUNCOLOR3  
             else:

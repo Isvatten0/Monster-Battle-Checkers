@@ -26,6 +26,7 @@ b3 = random.randint(0, 255)
 r4 = random.randint(0, 255)
 g4 = random.randint(0, 255)
 b4 = random.randint(0, 255)
+hair = random.randint(2,8)
 
 # Create a tuple of the random RGB values
 FUNCOLOR = (r, g, b)

@@ -17,7 +17,7 @@ def get_row_col_from_mouse(pos):
 def draw_difficulty_selection_window():
     pygame.init()
 
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
     pygame.display.set_caption("Difficulty Selection")
 
     font = pygame.font.Font(None, 36)
