@@ -11,7 +11,7 @@
 
 -- Play the game! Basic Rules of Checkers for now. You are Facing an AI. Do not let the robots win!
 
--- KNOWN BUG: if you do not click near the center of the square on your turn, then the game may not let you take your turn. To fix, click on your piece again.
+-- KNOWN BUGs: if you do not click near the center of the square on your turn, then the game may not let you take your turn. To fix, click on your piece again. ALSO, the harder the difficulty, the slower the AI.
 
 ## Features
 
