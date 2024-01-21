@@ -25,4 +25,4 @@
 
 ## Acknowledgements
 
-Base code based off of the tutorial from Tech with Tim. repo: https://github.com/techwithtim/Python-Checkers
+Base code based off following the tutorial series from Tech with Tim. repo: https://github.com/techwithtim/Python-Checkers
