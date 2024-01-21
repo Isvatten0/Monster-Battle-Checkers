@@ -80,7 +80,7 @@ class Board:
             
         if piece.color == FUNCOLOR2 or piece.king:
             moves.update(self._traverse_left(row + 1, min(row+3,ROWS), 1, piece.color, left))
-            moves.update(self._traverse_right(row + 1, max(row+3,ROWS), 1, piece.color, right))
+            moves.update(self._traverse_right(row + 1, min(row+3,ROWS), 1, piece.color, right))
 
         return moves
 
@@ -123,9 +123,7 @@ class Board:
         for r in range(start, stop, stepsize):
             if right >= COLS:
                 break
-            if r < 0 or r >= ROWS:
-                break
-            
+
             current = self.board[r][right]
             if current == 0:
                 if skipped and not last:

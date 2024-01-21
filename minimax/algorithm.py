@@ -45,5 +45,8 @@ def get_all_moves(board, color, game):
             temp_piece = temp_board.get_piece(piece.row, piece.col)
             new_board = simulate_move(temp_piece, move, temp_board, game, skip) #if you make this move, this is the result of the board
             moves.append(new_board)
+    
+    if not moves and not board.red_left == 0:
+        print("Tie Game")
 
     return moves
